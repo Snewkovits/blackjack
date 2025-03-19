@@ -52,7 +52,6 @@ const dealerGetCard = time => {
 }
 
 const reCalculateDealerPoints = timeout => {
-    let dealerPointsDisplay = document.getElementById('dealerPoints');
     let time = 50;
     let timeStep = time;
 
@@ -79,9 +78,10 @@ const reCalculateDealerPoints = timeout => {
         }
     }
 
+    let dealerPointsDisplay = document.getElementById('dealerPoints');
     let difference = dealerPoints - parseInt(dealerPointsDisplay.innerText);
     console.log(`Difference: ${difference}\nDealer points: ${dealerPoints}\nDealer points display: ${dealerPointsDisplay.innerText}`);
-
+    
     if (0 <= difference) {
         while (difference > 0) {
             setTimeout(() => {
@@ -102,8 +102,8 @@ const reCalculateDealerPoints = timeout => {
             difference--;
         }
     }
-
     console.log(dealerPoints);
+        
 }
 
 const reAlignDealerCards = () => {

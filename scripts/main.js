@@ -103,10 +103,6 @@ const resetDisplay = () => {
     enableStartButton();
 }
 
-const restart = () => {
-    
-}
-
 const disablePlayButtons = () => {
     let startButton = document.getElementById('start');
     let getCardButton = document.getElementById('getcard');
