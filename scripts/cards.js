@@ -298,6 +298,44 @@ const resetDeck = () => {
     }
 }
 
+const calculateDeck = deck => {
+    let deckNums = [];
+    let points = 0;
+    for (let i = 0; i < deck.length; i++) {
+        deckNums.push(deck[i].getAttribute('number'));
+    }
+
+    deck = sortDeck(deckNums);
+    for (let i = 0; i < deck.length; i++) {
+        let card = deck[i];
+        if (card != 'A' && card != 'K' && card != 'Q' && card != 'J') {
+            points += parseInt(card);
+        }
+        else if (card == 'K' || card == 'Q' || card == 'J') {
+            points += 10;
+        }
+        else if (card == 'A') {
+            if (points + 11 > 21) { points += 1; }
+            else {points += 11;}
+        }
+        else {
+            endGame('Error calculating points');
+        }
+    }
+    return points;
+}
+
+const sortDeck = deck => {
+    deck.forEach(card => {
+        if (card == 'A') {
+            let temp = deck[deck.length - 1];
+            deck[deck.length - 1] = card;
+            deck[deck.indexOf(card)] = temp;
+        }
+    });
+    return deck;
+}
+
 const deck = {
     hearts: {
         'A': { isOut: false },

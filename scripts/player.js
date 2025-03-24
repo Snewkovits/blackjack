@@ -1,6 +1,8 @@
 let playerDeck = [];
 let playerPoints = 0;
 
+/* Amikor a játékos megnyomja a "HIT" gombot akkor egy új kártyát hoz létre a program, majd leosztja a játékosnak */
+/* Ha a játékos kártyáinak a száma meghaladja a 21-et akkor a játékos veszít */
 const getNewCard = () => {
     let player = document.getElementsByClassName('player')[0];
     let newCard = getRandomCard();
@@ -22,13 +24,15 @@ const getNewCard = () => {
     }
 }
 
+/* A játékos megáll */
+/* A gombokat letiltja és a dealerPlays függvény folytatódik */
 const standHand = () => {
     disablePlayButtons();
     dealerPlays();
 }
 
+/* Újra számolja a játékos kártyáinak a helyzetét */
 const reAlignPlayerCards = () => {
-    console.log(playerDeck.length);
     let playerPos = window.innerWidth / 2 - playerDeck.length * 160 / 2 - playerDeck.length * 20 / 2;
     for (let i = 0; i < playerDeck.length; i++) {
         playerDeck[i].style.left = playerPos + 'px';
@@ -41,28 +45,7 @@ const reCalculatePlayerPoints = () => {
     let time = 50;
     let timeStep = time;
 
-    let cards = playerDeck;
-
-    playerPoints = 0;
-    
-    for (let i = 0; i < cards.length; i++) {
-        let card = cards[i];
-        let cardValue = card.getAttribute('number');
-        if (cardValue == 'A') {
-            if (playerPoints + 11 > 21) {
-                playerPoints += 1;
-            }
-            else {
-                playerPoints += 11;
-            }
-        }
-        else if (cardValue == 'K' || cardValue == 'Q' || cardValue == 'J') {
-            playerPoints += 10;
-        }
-        else {
-            playerPoints += parseInt(cardValue);
-        }
-    }
+    playerPoints = calculateDeck(playerDeck);
 
     for (let i = 0; i < playerPoints - playerPointsDisplay.innerText; i++) {
         setTimeout(() => {

@@ -50,6 +50,7 @@ async function start() {
     playerDeck[1].style.left = window.innerWidth / 2 + 90 + 'px';
 
     reCalculatePlayerPoints();
+    reAlignPlayerCards();
 }
 
 const endGame = message => {
@@ -157,28 +158,17 @@ const defaultButtonLayout = () => {
 
 window.onresize = () => {
     if (started) {
-        document.getElementById('getcard').style.left = window.innerWidth / 2 - 50 + 'px';
-        document.getElementById('stand').style.left = window.innerWidth / 2 + 80 + 'px';
         if (dealerTurn) {
-
-            let dealerPos = window.innerWidth / 2 - dealerDeck.length * 160 / 2 - dealerDeck.length * 20 / 2;
-    
-            for (let i = 0; i < dealerDeck.length; i++) {
-                dealerDeck[i].style.left = dealerPos + 'px';
-                dealerDeck += 180;
-            }
-
+            reAlignDealerCards();
         }
         else {
-            dealerDeck[0].style.left = window.innerWidth / 2 - 50 + 'px';
-            dealerDeck[1].style.left = window.innerWidth / 2 + 'px';
-        }
+            let getButton = document.getElementById('getcard');
+            getButton.style.left = window.innerWidth / 2 - 120 + 'px';
+            document.getElementById('stand').style.left = window.innerWidth / 2 + 120 + 'px';
 
-        let playerPos = window.innerWidth / 2 - playerDeck.length * 160 / 2 - playerDeck.length * 20 / 2;
-
-        for (let i = 0; i < playerDeck.length; i++) {
-            playerDeck[i].style.left = playerPos + 'px';
-            playerPos += 180;
+            dealerDeck[0].style.left = window.innerWidth / 2 - (160 + 50) / 2 + 'px';
+            dealerDeck[1].style.left = window.innerWidth / 2 - 160 / 2 + 'px';
         }
+        reAlignPlayerCards();
     }
 }
