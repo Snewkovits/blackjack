@@ -1,4 +1,4 @@
-window.debug = true; //! Debug mode, ne felejtsd el kikapcsolni
+window.debug = false;
 let started = false;
 let dealerTurn = false;
 
