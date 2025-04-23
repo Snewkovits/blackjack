@@ -192,3 +192,73 @@ body > div {
     background-color: rgb(40, 40, 40);
     color: white;
 }
+
+#money-container {
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
+}
+
+#money-container > div {
+    position: absolute;
+}
+
+#balance-text, #bet-text {
+    text-transform: uppercase;
+    color: rgb(50, 50, 50, .1);
+    font-size: 72pt;
+    font-weight: 800;
+}
+
+#balance, #bet, #plus, #minus {
+    color: rgb(40, 40, 40);
+    font-size: 50pt;
+    font-weight: 800;
+}
+
+#balance-text {
+    bottom: 100px;
+    right: 10px;
+}
+
+#balance {
+    bottom: 100px;
+    right: 10px;
+}
+
+#bet-text {
+    bottom: 0px;
+    right: 10px;
+}
+
+#bet {
+    bottom: 0px;
+    right: 10px;
+}
+
+#bet-buttons {
+    position: absolute;
+    bottom: 0px;
+    right: 250px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 0px;
+}
+
+#bet-buttons > div {
+    text-align: center;
+    margin-top: -50px;
+
+    cursor: pointer;
+
+    line-height: 50px;
+}
+
+#plus {
+    margin-bottom: 50px;
+}
+
+#minus {
+    margin-bottom: 20px;
+}

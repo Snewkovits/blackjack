@@ -172,3 +172,39 @@ window.onresize = () => {
         reAlignPlayerCards();
     }
 }
+
+document.getElementById('plus').onclick = () => {
+    let bet = document.getElementById('bet');
+    let balance = document.getElementById('balance');
+    let betValue = parseInt(bet.innerText.replace('$',''));
+    let balanceValue = parseInt(balance.innerText.replace('$',''));
+
+    if (balanceValue > 10) {
+        betValue += 10;
+        balanceValue -= 10;
+    }
+    else {
+        betValue += balanceValue;
+        balanceValue = 0;
+    }
+    bet.innerText = `$${betValue}`;
+    balance.innerText = `$${balanceValue}`;
+}
+
+document.getElementById('minus').onclick = () => {
+    let bet = document.getElementById('bet');
+    let balance = document.getElementById('balance');
+    let betValue = parseInt(bet.innerText.replace('$',''));
+    let balanceValue = parseInt(balance.innerText.replace('$',''));
+
+    if (betValue > 10) {
+        betValue -= 10;
+        balanceValue += 10;
+    }
+    else {
+        balanceValue += betValue;
+        betValue = 0;
+    }
+    bet.innerText = `$${betValue}`;
+    balance.innerText = `$${balanceValue}`;
+}
