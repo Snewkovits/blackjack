@@ -49,7 +49,9 @@ const reCalculatePlayerPoints = () => {
 
     for (let i = 0; i < playerPoints - playerPointsDisplay.innerText; i++) {
         setTimeout(() => {
-            playerPointsDisplay.textContent = parseInt(playerPointsDisplay.innerText) + 1;
+            if (parseInt(playerPointsDisplay.innerText) < playerPoints) {
+                playerPointsDisplay.textContent = parseInt(playerPointsDisplay.innerText) + 1;
+            }
         }, time);
         time += timeStep;
     }
