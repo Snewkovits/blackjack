@@ -40,6 +40,16 @@ const reAlignPlayerCards = () => {
     }
 }
 
+/**
+ * Animálja a játékos pontszámának kijelzését úgy, hogy lépésenként növeli a megjelenített értéket,
+ * amíg el nem éri a játékos paklijában lévő kártyák összpontszámát.
+ *
+ * Lekéri az aktuális pontszámot a 'playerPoints' azonosítójú DOM elemből, kiszámolja az új összpontszámot
+ * a `calculateDeck(playerDeck)` függvénnyel, majd késleltetéssel animálja a pontszám növekedését.
+ *
+ * @function
+ * @returns {void}
+ */
 const reCalculatePlayerPoints = () => {
     let playerPointsDisplay = document.getElementById('playerPoints');
     let time = 50;

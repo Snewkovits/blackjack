@@ -262,3 +262,11 @@ body > div {
 #minus {
     margin-bottom: 20px;
 }
+
+#money-container > div {
+    transition: opacity .5s;
+}
+
+#money-container > div > div {
+    transition: opacity .5s;
+}

@@ -1,12 +1,13 @@
+// Creates a card DOM element with the given type (suit) and number (value)
 const createCard = (type, num) => {
-    let shape = window.shape(type);
+    let shape = window.shape(type); // Get shape info (image, color, filter) for the suit
     let leftright = '10px';
 
     let card = document.createElement('div');
     card.className = 'card';
     card.setAttribute('number', num);
 
-    // Numbers
+    // Create front and back sides of the card
     let front = document.createElement('div');
     let back = document.createElement('div');
     front.className ='front';
@@ -15,10 +16,12 @@ const createCard = (type, num) => {
     card.appendChild(front);
     card.appendChild(back);
 
+    // Adjust left/right offset for '10'
     if (num == '10') {
         leftright = '4px';
     }
     
+    // Add number to each corner of the card
     element = document.createElement('div');
     Object.assign(element, {
         innerHTML: num,
@@ -47,7 +50,7 @@ const createCard = (type, num) => {
     });
     front.appendChild(element);
 
-    // Little Shapes
+    // Add small suit images to each corner
     element = document.createElement('img');
     Object.assign(element, {
         src: shape.image,
@@ -76,7 +79,7 @@ const createCard = (type, num) => {
     });
     front.appendChild(element);
 
-    // Big shape.images
+    // Add big suit images in the center, depending on card value
     if (num == '2' || num == '3') {
         element = document.createElement('img');
         Object.assign(element, {
@@ -104,6 +107,7 @@ const createCard = (type, num) => {
         front.appendChild(element);
     }
 
+    // Add more suit images for higher card values
     if (num == '4' || num == '5' || num == '6' || num == '7' || num == '8' || num == '9' || num == '10') {
         element = document.createElement('img');
         Object.assign(element, {
@@ -214,12 +218,14 @@ const createCard = (type, num) => {
 
     card.setAttribute('flipped', false);
 
+    // Enable flipping for debugging
     if (window.debug)
         card.onclick = () => flipCard(card);
 
     return card;
 }
 
+// Returns shape info (image, color, filter) for a given suit type
 window.shape = type => {
     if (type == 'hearts') {
         return {
@@ -252,6 +258,7 @@ window.shape = type => {
     return 'error';
 }
 
+// Flips a card element between front and back
 const flipCard = card => {
     let front = card.getElementsByClassName('front')[0];
     let back = card.getElementsByClassName('back')[0];
@@ -275,12 +282,14 @@ const flipCard = card => {
     }
 };
 
+// Returns a random card from the deck that hasn't been drawn yet
 const getRandomCard = () => {
     let type = Math.floor(Math.random() * 4);
     let num = Math.floor(Math.random() * 13);
     let types = [deck.hearts, deck.diamonds, deck.spades, deck.clubs];
     let nums = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
 
+    // If card is already out, try again
     if (types[type][nums[num]].isOut) {
         return getRandomCard();
     }
@@ -290,6 +299,7 @@ const getRandomCard = () => {
     }
 }
 
+// Resets the deck so all cards are available again
 const resetDeck = () => {
     for (let type in deck) {
         for (let num in deck[type]) {
@@ -298,6 +308,7 @@ const resetDeck = () => {
     }
 }
 
+// Calculates the total points for a given hand (array of card elements)
 const calculateDeck = deck => {
     let deckNums = [];
     let points = 0;
@@ -315,6 +326,7 @@ const calculateDeck = deck => {
             points += 10;
         }
         else if (card == 'A') {
+            // Ace is 11 unless it would bust, then it's 1
             if (points + 11 > 21) { points += 1; }
             else {points += 11;}
         }
@@ -325,6 +337,7 @@ const calculateDeck = deck => {
     return points;
 }
 
+// Moves Aces to the end of the deck array for easier point calculation
 const sortDeck = deck => {
     deck.forEach(card => {
         if (card == 'A') {
@@ -336,6 +349,7 @@ const sortDeck = deck => {
     return deck;
 }
 
+// Deck object: each suit contains all card values, each with an isOut flag
 const deck = {
     hearts: {
         'A': { isOut: false },
